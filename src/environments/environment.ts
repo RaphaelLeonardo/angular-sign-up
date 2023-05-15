@@ -4,12 +4,13 @@
 
 export const environment = {
   firebase: {
-    apiKey: 'AIzaSyChyrQOvph3mZt6Sqi2ErZD5FknLvi7n40',
-    authDomain: 'angular-sign-up-719ed.firebaseapp.com',
-    projectId: 'angular-sign-up-719ed',
-    storageBucket: 'angular-sign-up-719ed.appspot.com',
-    messagingSenderId: '378550273300',
-    appId: '1:378550273300:web:494c048877b2fdaaf62e01',
+    projectId: 'projettoentrar',
+    appId: '1:223981415108:web:d0dd5d61dba8faeaf4b791',
+    storageBucket: 'projettoentrar.appspot.com',
+    apiKey: 'AIzaSyAomw-FsIUeNVk3kIaMrjR7MiFO1XDNYVg',
+    authDomain: 'projettoentrar.firebaseapp.com',
+    messagingSenderId: '223981415108',
+    measurementId: 'G-EQF3FSENQ2',
   },
   production: false,
 };
@@ -22,3 +23,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+

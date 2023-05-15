@@ -2,7 +2,7 @@
   class="form-container mat-elevation-z5 text-center"
   *ngIf="user$ | async as user"
 >
-  <h1>Update Profile</h1>
+  <h1>Atualizar perfil</h1>
   <div class="profile-image">
     <img
       width="120"
@@ -11,7 +11,7 @@
       [src]="user.photoURL ?? '/assets/images/image-placeholder.png'"
     />
     <button mat-mini-fab (click)="inputField.click()">
-      <mat-icon>edit</mat-icon>
+      <mat-icon>editar</mat-icon>
     </button>
   </div>
   <input #inputField hidden type="file" (change)="uploadFile($event, user)" />
@@ -64,7 +64,7 @@
     </mat-form-field>
 
     <button type="submit" class="margin-top" mat-raised-button color="primary">
-      Save
+      Salvar alterações
     </button>
   </form>
 </div>

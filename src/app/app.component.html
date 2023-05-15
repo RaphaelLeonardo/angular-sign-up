@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  Sign Up Flow with Firebase
+  O incrível mundo de Angular
   <ng-container *ngIf="user$ | async as user; else loginButton">
     <button mat-button [matMenuTriggerFor]="userMenu">
       <img
@@ -27,7 +27,7 @@
 <mat-menu #userMenu="matMenu">
   <button mat-menu-item routerLink="/profile">
     <mat-icon>account_circle</mat-icon>
-    Profile
+    Perfil
   </button>
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>

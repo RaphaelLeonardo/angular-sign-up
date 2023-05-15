@@ -37,8 +37,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -107,8 +107,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "angular-sign-up:build:production",
-            "firebaseProject": "angular-sign-up",
-            "firebaseHostingSite": "angular-sign-up"
+            "firebaseProject": "projettoentrar",
+            "firebaseHostingSite": "projettoentrar"
           }
         }
       }
