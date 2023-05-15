@@ -22,6 +22,16 @@ import { LandingComponent } from './components/landing/landing.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ProfileComponent } from './components/profile/profile.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { FormsModule } from '@angular/forms';
+
+import { TaskComponent } from './components/task/task.component';
+import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -31,6 +41,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     LandingComponent,
     HomeComponent,
     ProfileComponent,
+    TaskComponent,
+    TaskDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +54,10 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    DragDropModule,
+    FormsModule,
+    MatCardModule,
+    MatDialogModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

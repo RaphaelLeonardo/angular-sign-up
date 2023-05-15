@@ -45,9 +45,9 @@ export class ProfileComponent implements OnInit {
       .uploadImage(event.target.files[0], `images/profile/${uid}`)
       .pipe(
         this.toast.observe({
-          loading: 'Uploading profile image...',
-          success: 'Image uploaded successfully',
-          error: 'There was an error in uploading the image',
+          loading: 'Fazendo upload da imagem...',
+          success: 'Upload feito com sucesso!',
+          error: 'Houve um erro durante o upload da imagem :(',
         }),
         switchMap((photoURL) =>
           this.usersService.updateUser({
@@ -70,9 +70,9 @@ export class ProfileComponent implements OnInit {
       .updateUser({ uid, ...data })
       .pipe(
         this.toast.observe({
-          loading: 'Saving profile data...',
-          success: 'Profile updated successfully',
-          error: 'There was an error in updating the profile',
+          loading: 'Salvando alterações de perfil...',
+          success: 'Perfil atualizado com sucesso!',
+          error: 'Houve um erro ao atualizar o perfil :(',
         })
       )
       .subscribe();
