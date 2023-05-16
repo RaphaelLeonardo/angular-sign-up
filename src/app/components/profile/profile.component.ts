@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit {
         )
       )
       .subscribe();
+      console.log(event.target.files[0])
   }
 
   saveProfile() {

@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
-  O incrível mundo de Angular
-  <ng-container *ngIf="user$ | async as user; else loginButton">
+SuperLogin do Raphinha
+ <div id="home">
+  <button id="home" mat-menu-item routerLink="/home">
+    <mat-icon class="icon-color">home</mat-icon>
+  </button>
+<ng-container *ngIf="user$ | async as user; else loginButton">
     <button mat-button [matMenuTriggerFor]="userMenu">
       <img
         width="30"
@@ -18,6 +22,8 @@
       Login
     </button>
   </ng-template>
+ </div>
+
 </mat-toolbar>
 
 <div class="content">
@@ -28,10 +34,6 @@
   <button mat-menu-item routerLink="/profile">
     <mat-icon>account_circle</mat-icon>
     Perfil
-  </button>
-  <button mat-menu-item routerLink="/home">
-    <mat-icon>home</mat-icon>
-    Home
   </button>
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>
