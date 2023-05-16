@@ -29,6 +29,8 @@ import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
 
 
 
@@ -65,7 +67,7 @@ import { TaskDialogComponent } from './components/task-dialog/task-dialog.compon
     HotToastModule.forRoot(),
     MatMenuModule,
   ],
-  providers: [],
+  providers: [ { provide: FIREBASE_OPTIONS, useValue: environment.firebase } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
