@@ -24,3 +24,26 @@
   display: flex;
   gap: 16px;
 }
+
+@media screen and (max-width: 767px) {
+  .form-container {
+    max-width: none;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-image {
+    position: static;
+    align-self: flex-end;
+    width: 80px;
+  }
+
+  .profile-image > button {
+    position: static;
+    margin-top: 10px;
+    align-self: flex-end;
+  }
+}
