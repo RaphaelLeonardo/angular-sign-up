@@ -15,12 +15,12 @@
       cdkDropList
       id="todo"
       #todoList="cdkDropList"
-      [cdkDropListData]="todo | async"
+      [cdkDropListData]="filterTasksByUser(todo | async)"
       [cdkDropListConnectedTo]="[doneList, inProgressList]"
       (cdkDropListDropped)="drop($event)"
       class="list">
-      <p class="empty-label" *ngIf="(todo | async)?.length === 0">Lista vazia</p>
-      <app-task (edit)="editTask('todo', $event)" *ngFor="let task of todo | async" cdkDrag [task]="task"></app-task>
+      <p class="empty-label" *ngIf="filterTasksByUser(todo | async)?.length === 0">Lista vazia</p>
+      <app-task (edit)="editTask('todo', $event)" *ngFor="let task of filterTasksByUser(todo | async)" cdkDrag [task]="task"></app-task>
     </mat-card>
   </div>
 
@@ -31,12 +31,12 @@
       cdkDropList
       id="inProgress"
       #inProgressList="cdkDropList"
-      [cdkDropListData]="inProgress | async"
+      [cdkDropListData]="filterTasksByUser(inProgress | async)"
       [cdkDropListConnectedTo]="[todoList, doneList]"
       (cdkDropListDropped)="drop($event)"
       class="list">
-      <p class="empty-label" *ngIf="(inProgress | async)?.length === 0">Lista vazia</p>
-      <app-task (edit)="editTask('inProgress', $event)" *ngFor="let task of inProgress | async" cdkDrag [task]="task"></app-task>
+      <p class="empty-label" *ngIf="filterTasksByUser(inProgress | async)?.length === 0">Lista vazia</p>
+      <app-task (edit)="editTask('inProgress', $event)" *ngFor="let task of filterTasksByUser(inProgress | async)" cdkDrag [task]="task"></app-task>
     </mat-card>
   </div>
 
@@ -47,12 +47,12 @@
       cdkDropList
       id="done"
       #doneList="cdkDropList"
-      [cdkDropListData]="done | async"
+      [cdkDropListData]="filterTasksByUser(done | async)"
       [cdkDropListConnectedTo]="[todoList, inProgressList]"
       (cdkDropListDropped)="drop($event)"
       class="list">
-      <p class="empty-label" *ngIf="(done | async)?.length === 0">Lista vazia</p>
-      <app-task (edit)="editTask('done', $event)" *ngFor="let task of done | async" cdkDrag [task]="task"></app-task>
+      <p class="empty-label" *ngIf="filterTasksByUser(done | async)?.length === 0">Lista vazia</p>
+      <app-task (edit)="editTask('done', $event)" *ngFor="let task of filterTasksByUser(done | async)" cdkDrag [task]="task"></app-task>
     </mat-card>
   </div>
 </div>

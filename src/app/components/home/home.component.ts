@@ -1,5 +1,5 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 
 import { Task } from '../task/task';
@@ -11,6 +11,10 @@ import { AngularFirestoreModule, AngularFirestore, AngularFirestoreCollection } 
 import { Observable } from 'rxjs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BehaviorSubject } from 'rxjs';
+import { ProfileUser } from 'src/app/models/user';
+import { map, take } from 'rxjs/operators';
+
+
 
 const getObservable = (collection: AngularFirestoreCollection<Task>) => {
   const subject = new BehaviorSubject<Task[]>([]);
@@ -27,10 +31,17 @@ const getObservable = (collection: AngularFirestoreCollection<Task>) => {
 })
 export class HomeComponent implements OnInit {
   user$ = this.usersService.currentUserProfile$;
+  userId: string | null = null;
 
-  constructor(private usersService: UsersService, private dialog: MatDialog, private store: AngularFirestore) {}
+  constructor(private usersService: UsersService, private dialog: MatDialog, private store: AngularFirestore, private AuthService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {this.AuthService.currentUser$.subscribe(user => {
+    this.userId = user?.uid;
+  });}
+
+  filterTasksByUser(tasks: Task[]): Task[] {
+    return tasks.filter(task => task.userId === this.userId);
+  }
 
  /* todo: Task[] = [
     {
@@ -118,6 +129,14 @@ export class HomeComponent implements OnInit {
         if (!result) {
           return;
         }
-        this.store.collection('todo').add(result.task)      });
+        this.AuthService.currentUser$.pipe(take(1)).subscribe(user => {
+          const userId = user?.uid; // Obtém o ID do usuário atual
+          if (userId) {
+            const taskWithUserId = { ...result.task, userId }; // Adiciona o ID do usuário à tarefa
+            this.store.collection('todo').add(taskWithUserId);
+          }
+        });
+      });
   }
 }
+//this.store.collection('todo').add(result.task)      });
