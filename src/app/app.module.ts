@@ -31,10 +31,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +61,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
-    MatMenuModule,
+    MatMenuModule
   ],
   providers: [ { provide: FIREBASE_OPTIONS, useValue: environment.firebase } ],
   bootstrap: [AppComponent],

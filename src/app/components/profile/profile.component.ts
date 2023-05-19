@@ -7,6 +7,8 @@ import { ProfileUser } from 'src/app/models/user';
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { UsersService } from 'src/app/services/users.service';
 
+
+
 @UntilDestroy()
 @Component({
   selector: 'app-profile',
@@ -78,4 +80,5 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe();
   }
+
 }
