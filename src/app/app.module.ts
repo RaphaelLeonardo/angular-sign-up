@@ -30,6 +30,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { MenuComponent } from './menu/menu.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 
@@ -44,7 +46,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     HomeComponent,
     ProfileComponent,
     TaskComponent,
-    TaskDialogComponent
+    TaskDialogComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -66,8 +69,11 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
     MatMenuModule,
+    HttpClientModule
   ],
-  providers: [ { provide: FIREBASE_OPTIONS, useValue: environment.firebase } ],
+  providers: [ { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    HttpClientModule,
+    HttpClient ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

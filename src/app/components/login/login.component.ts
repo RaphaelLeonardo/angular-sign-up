@@ -1,3 +1,4 @@
+import { ThemeService } from './../../services/theme.service';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private toast: HotToastService,
     private router: Router,
-    private fb: NonNullableFormBuilder
+    private fb: NonNullableFormBuilder,
+    private ThemeService: ThemeService
   ) {}
 
   ngOnInit(): void {}
@@ -39,17 +41,23 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authService
-      .login(email, password)
-      .pipe(
-        this.toast.observe({
-          success: 'Logado com sucesso',
-          loading: 'Fazendo login...',
-          error: ({ message }) => `Houve um erro: ${message} `,
-        })
-      )
-      .subscribe(() => {
-        this.router.navigate(['/home']);
+    this.authService.login(email, password).subscribe(() => {
+      // Verificar o tema do usuário logado
+      this.ThemeService.getThemeByUser('userId').subscribe(theme => {
+        if (theme) {
+          // Se o tema existir, definir o tema do usuário
+          this.ThemeService.setTheme(theme);
+        } else {
+          // Se o tema não existir, definir o tema padrão
+          this.ThemeService.setTheme('default');
+        }
       });
+
+      this.toast.success('Logado com sucesso');
+      this.router.navigate(['/home']);
+    }, (error) => {
+      // Manipular erros de autenticação
+      this.toast.error(`Houve um erro: ${error.message}`);
+    });
   }
 }

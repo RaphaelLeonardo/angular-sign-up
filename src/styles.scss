@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: "bonita";
+  src: url(assets/fonts/stf-elevated-re-work.otf) format('opentype');
+  font-style: normal;
+}
+
 html,
 body {
   height: 100%;

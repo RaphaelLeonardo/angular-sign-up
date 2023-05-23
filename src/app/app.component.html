@@ -1,5 +1,9 @@
 <mat-toolbar color="primary">
-Taskinhas
+  Taskinhas
+  <app-menu
+    [options]="options$ | async"
+    (themeChange)="themeChangeHandler($event)">
+  </app-menu>
  <div id="home">
   <button id="home" mat-menu-item routerLink="/home">
     <mat-icon class="icon-color">home</mat-icon>
