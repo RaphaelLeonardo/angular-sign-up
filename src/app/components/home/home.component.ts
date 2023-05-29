@@ -30,7 +30,6 @@ const getObservable = (collection: AngularFirestoreCollection<Task>) => {
 })
 export class HomeComponent implements OnInit {
 
-  private themeCollection = 'themes';
   user$ = this.usersService.currentUserProfile$;
   userId: string | null = null;
 
