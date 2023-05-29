@@ -3,9 +3,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/services/auth.service';
-import { switchMap } from 'rxjs';
 import { ThemeService } from 'src/app/services/theme.service';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',

@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
-  collection,
   doc,
   docData,
   Firestore,
-  getDoc,
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { filter, from, map, Observable, of, switchMap } from 'rxjs';
+import { from, Observable, of, switchMap } from 'rxjs';
 import { ProfileUser } from '../models/user';
 import { AuthService } from './auth.service';
 

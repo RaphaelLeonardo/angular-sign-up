@@ -6,10 +6,7 @@ import { Option } from '../models/option';
 import { StyleManagerService } from './style-manager.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
-import { map } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import { UsersService } from './users.service';
 import { ThemOption } from '../models/them-option';
 
 

@@ -1,4 +1,4 @@
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 
 import { Option } from './models/option';
 import { ThemeService } from './services/theme.service';
-import { MenuComponent } from './menu/menu.component';
 
 @Component({
   selector: 'app-root',

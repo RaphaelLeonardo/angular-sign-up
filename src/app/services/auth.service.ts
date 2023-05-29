@@ -4,11 +4,9 @@ import {
   signInWithEmailAndPassword,
   authState,
   createUserWithEmailAndPassword,
-  updateProfile,
-  UserInfo,
   UserCredential,
 } from '@angular/fire/auth';
-import { concatMap, from, Observable, of, switchMap } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

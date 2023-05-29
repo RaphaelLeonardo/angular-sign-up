@@ -2,20 +2,15 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 
-import { ThemOption } from 'src/app/models/them-option';
 import { Task } from '../task/task';
-import { CdkDragDrop, CdkDrag, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { TaskDialogResult } from '../task-dialog/task-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AngularFirestoreModule, AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore/';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore/';
 import { Observable } from 'rxjs';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BehaviorSubject } from 'rxjs';
-import { ProfileUser } from 'src/app/models/user';
-import { map, take } from 'rxjs/operators';
-import { collection } from 'firebase/firestore';
-import { ThemeService } from 'src/app/services/theme.service';
+import { take } from 'rxjs/operators';
 
 
 
