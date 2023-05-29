@@ -1,9 +1,11 @@
-import { ThemeService } from './../../services/theme.service';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/services/auth.service';
+import { switchMap } from 'rxjs';
+import { ThemeService } from 'src/app/services/theme.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
     private toast: HotToastService,
     private router: Router,
     private fb: NonNullableFormBuilder,
-    private ThemeService: ThemeService
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {}
@@ -41,23 +43,17 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authService.login(email, password).subscribe(() => {
-      // Verificar o tema do usuário logado
-      this.ThemeService.getThemeByUser('userId').subscribe(theme => {
-        if (theme) {
-          // Se o tema existir, definir o tema do usuário
-          this.ThemeService.setTheme(theme);
-        } else {
-          // Se o tema não existir, definir o tema padrão
-          this.ThemeService.setTheme('default');
-        }
-      });
-
-      this.toast.success('Logado com sucesso');
-      this.router.navigate(['/home']);
-    }, (error) => {
-      // Manipular erros de autenticação
-      this.toast.error(`Houve um erro: ${error.message}`);
-    });
-  }
+    this.authService
+  .login(email, password)
+  .pipe(
+    this.toast.observe({
+      success: 'Logado com sucesso',
+      loading: 'Fazendo login...',
+      error: ({ message }) => `Houve um erro: ${message} `,
+    })
+  )
+  .subscribe(() => {
+    this.router.navigate(['/home']);
+  });
+}
 }

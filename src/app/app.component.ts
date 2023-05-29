@@ -17,37 +17,34 @@ import { MenuComponent } from './menu/menu.component';
 export class AppComponent {
 
   user$ = this.usersService.currentUserProfile$;
-  options$: Observable<Array<Option>> = this.ThemeService.getThemeOptions();
-  currentTheme: string;
+  options$: Observable<Array<Option>> = this.themeService.getThemeOptions();
+  currentTheme$: Observable<string> = this.themeService.getCurrentTheme();
+
 
 
   constructor(
     private authService: AuthService,
     public usersService: UsersService,
     private router: Router,
-    private ThemeService: ThemeService
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
-
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         const userId = user.uid;
-        this.ThemeService.getThemeByUser(userId).subscribe(theme => {
-          if (theme) {
-            this.currentTheme = theme;
-          } else {
-            this.currentTheme = 'deeppurple-amber'; // Defina o tema padrão aqui
-          }
+        this.themeService.getThemeByUser(userId).subscribe(theme => {
+          this.themeService.setTheme(theme.theme);
         });
       } else {
-        this.currentTheme = 'deeppurple-amber'; // Defina o tema padrão aqui
+        // Usuário não autenticado, defina o tema padrão
+        this.themeService.setTheme('deeppurple-amber');
       }
     });
   }
 
   themeChangeHandler(themeToSet) {
-    this.ThemeService.setTheme(themeToSet);
+    this.themeService.setTheme(themeToSet);
   }
 
   logout() {

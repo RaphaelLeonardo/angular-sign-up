@@ -2,6 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 
+import { ThemOption } from 'src/app/models/them-option';
 import { Task } from '../task/task';
 import { CdkDragDrop, CdkDrag, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
@@ -13,6 +14,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BehaviorSubject } from 'rxjs';
 import { ProfileUser } from 'src/app/models/user';
 import { map, take } from 'rxjs/operators';
+import { collection } from 'firebase/firestore';
+import { ThemeService } from 'src/app/services/theme.service';
 
 
 
@@ -24,12 +27,15 @@ const getObservable = (collection: AngularFirestoreCollection<Task>) => {
   return subject;
 };
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+
+  private themeCollection = 'themes';
   user$ = this.usersService.currentUserProfile$;
   userId: string | null = null;
 
@@ -55,6 +61,8 @@ export class HomeComponent implements OnInit {
   ];
   inProgress: Task[] = [];
   done: Task[] = [];*/
+
+
 
   todo = getObservable(this.store.collection('todo')) as Observable<Task[]>;
   inProgress = getObservable(this.store.collection('inProgress')) as Observable<Task[]>;

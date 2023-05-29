@@ -8,6 +8,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { UsersService } from './users.service';
+import { ThemOption } from '../models/them-option';
 
 
 @Injectable({
@@ -15,7 +18,8 @@ import { map } from 'rxjs';
 })
 export class ThemeService {
   private themeCollection = 'themes'; // Nome da coleção no Firestore
-
+  private currentThemeSubject: BehaviorSubject<string> = new BehaviorSubject<string>(''); // Subject para armazenar o tema atual
+  public themeChanged$: Observable<string> = this.currentThemeSubject.asObservable(); // Observable para acompanhar as alterações do tema
 
   constructor(
     private http: HttpClient,
@@ -37,20 +41,40 @@ export class ThemeService {
     this.auth.currentUser.then(user => {
       if (user) {
         const userId = user.uid;
-        const themeData = { theme: themeToSet };
+        const themeData = { userId: userId, theme: themeToSet };
 
         this.firestore.collection(this.themeCollection).doc(userId).set(themeData)
           .then(() => console.log('Tema salvo no Firebase'))
           .catch(error => console.error('Erro ao salvar o tema no Firebase:', error));
       }
     });
+     // Atualizar o tema atual
+     this.currentThemeSubject.next(themeToSet);
   }
 
-  getThemeByUser(userId: string): Observable<string> {
-    return this.firestore.collection(this.themeCollection).doc(userId)
-      .valueChanges()
-      .pipe(
-        map((data: any) => data?.theme)
-      );
+
+  getCurrentTheme(): Observable<string> {
+    return this.currentThemeSubject.asObservable();
   }
-}
+
+  getThemeByUser(userId: string): Observable<ThemOption> {
+    return new Observable<ThemOption>((observer) => {
+      this.auth.currentUser.then((user) => {
+        if (user) {
+          const userId = user.uid;
+          this.firestore.collection('themes').doc(userId).get().subscribe((snapshot) => {
+            const theme = snapshot.data() as ThemOption;
+            observer.next(theme);
+            observer.complete();
+          }, (error) => {
+            observer.error(error);
+          });
+        } else {
+          observer.error(new Error('User not authenticated'));
+        }
+      });
+    });
+  }
+
+ }
+
